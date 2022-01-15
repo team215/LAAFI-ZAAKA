@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/activity_accueille.xml" value="0.25" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/drawable/back_design.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/drawable/back_design2.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/drawable/btn_design1.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/drawable/btn_design2.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/drawable/no_location.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/activity_accueille.xml" value="0.22" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/activity_apropos.xml" value="0.25" />
         <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/activity_maps.xml" value="0.2" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/alert_dialog_layout.xml" value="0.22" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/custom_list_numero_vert.xml" value="0.22" />
         <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/hopital_fragment.xml" value="0.1" />
-        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/numero_vert_fragment.xml" value="0.2" />
-        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/pharmacie_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/numero_vert_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/Abdoul Aziz/AndroidStudioProjects/LAAFIZAAKA/app/src/main/res/layout/pharmacie_fragment.xml" value="0.22" />
       </map>
     </option>
   </component>

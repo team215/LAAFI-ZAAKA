@@ -3,12 +3,16 @@ package com.example.laafizaaka;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AccueilleActivity extends AppCompatActivity {
     private TextView AppVersion;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +20,10 @@ public class AccueilleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accueille);
 
         AppVersion= findViewById(R.id.appVersion);
+        image= findViewById(R.id.imageView);
+
+        Animation animation= AnimationUtils.loadAnimation(this, R.anim.animation);
+        image.startAnimation(animation);
 
         //Pour avoir la version de l'application
         String name= BuildConfig.VERSION_NAME;

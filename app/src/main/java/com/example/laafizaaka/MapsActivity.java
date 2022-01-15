@@ -2,13 +2,19 @@ package com.example.laafizaaka;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +23,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+
+import com.example.laafizaaka.ClassUtile.GetNearbyPlacesData;
 import com.example.laafizaaka.Fragment.HopitalFragment;
 import com.example.laafizaaka.Fragment.NumeroVertFragment;
 import com.example.laafizaaka.Fragment.PharmacieFragment;
 import com.example.laafizaaka.databinding.ActivityMapsBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -52,9 +62,13 @@ public class MapsActivity extends FragmentActivity implements
     private Location lastLocation;
     private Marker currentUserLocationMarker;
     private final static int request_user_location_code= 99;
+    private double latitude, longitude;
+    private int PROXIMITY_RADIUS = 10000;
 
-    private ImageView PharBtn, HopBtn, NumVertBtn, PharBtnClick, HopBtnClick, NumVertBtnClick;
-    private FrameLayout frameLayout;
+    private ImageView PharBtn, HopBtn, NumVertBtn, PharBtnClick, HopBtnClick, NumVertBtnClick, connImg;
+
+    private FragmentContainerView mLayout;
+    private TextView connTex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +84,23 @@ public class MapsActivity extends FragmentActivity implements
         NumVertBtn= findViewById(R.id.id_numero_vert);
         NumVertBtnClick= findViewById(R.id.id_numero_vert_click);
 
+        mLayout= findViewById(R.id.map);
+        connTex= findViewById(R.id.no_con_txt);
+        connImg= findViewById(R.id.no_con_img);
+
+       ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        // test for connection
+        if (cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected()) {
+            mLayout.setVisibility(View.VISIBLE);
+
+        }else {
+            mLayout.setVisibility(View.GONE);
+            connImg.setVisibility(View.VISIBLE);
+            connTex.setVisibility(View.VISIBLE);
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             CheckUserLocationPermission();
         }
@@ -79,8 +110,9 @@ public class MapsActivity extends FragmentActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //Appui sur le bouton pharmacie
+       //Appui sur le bouton pharmacie
         PharBtn.setOnClickListener(v -> {
+
             PharBtnClick.setVisibility(View.VISIBLE);
             PharBtn.setVisibility(View.GONE);
 
@@ -95,6 +127,11 @@ public class MapsActivity extends FragmentActivity implements
 
         //Appui sur le bouton hopital
         HopBtn.setOnClickListener(v -> {
+            String hospital = "hospital";
+
+            Object[] DataTransfer = new Object[2];
+            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+
             HopBtnClick.setVisibility(View.VISIBLE);
             HopBtn.setVisibility(View.GONE);
 
@@ -104,11 +141,19 @@ public class MapsActivity extends FragmentActivity implements
             NumVertBtnClick.setVisibility(View.GONE);
             NumVertBtn.setVisibility(View.VISIBLE);
 
-            replaceFragment(new HopitalFragment());
+                /*mMap.clear();
+                String url= getUrl(latitude, longitude, hospital);
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                getNearbyPlacesData.execute(DataTransfer);
+                */
+
+          replaceFragment(new HopitalFragment());
         });
 
         //Appui sur le bouton numéro vert
         NumVertBtn.setOnClickListener(v -> {
+
             NumVertBtnClick.setVisibility(View.VISIBLE);
             NumVertBtn.setVisibility(View.GONE);
 
@@ -121,15 +166,49 @@ public class MapsActivity extends FragmentActivity implements
             replaceFragment(new NumeroVertFragment());
         });
 
+
     }
+
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
+
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlacesUrl.append("location=" + latitude + "," + longitude);
+        googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+        googlePlacesUrl.append("&type=" + nearbyPlace);
+        googlePlacesUrl.append("&sensor=true");
+        googlePlacesUrl.append("&key=" + "AIzaSyDeeKvnbIQAm-XD_vbd0bjBacNvdgAKGWM");
+
+        return googlePlacesUrl.toString();
+    }
+
 
     //Méthode qui permet de remplacer les fragments quand on appui sur les différents boutons
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager= getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-    }
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        // test for connection
+        if (cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected()) {
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.map, fragment);
+            fragmentTransaction.commit();
+
+        }else {
+            connTex= findViewById(R.id.no_con_txt);
+            connImg= findViewById(R.id.no_con_img);
+
+            connImg.setVisibility(View.GONE);
+            connTex.setVisibility(View.GONE);
+
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+        }
+
+    } 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -197,6 +276,9 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     public void onLocationChanged(@NonNull Location location) {
 
+        latitude= location.getLatitude();
+        longitude= location.getLongitude();
+
         lastLocation= location;
         if (currentUserLocationMarker!= null){
             currentUserLocationMarker.remove();
@@ -243,4 +325,6 @@ public class MapsActivity extends FragmentActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
 }

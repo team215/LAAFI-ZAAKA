@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="rouge">#F21313</color>
-    <color name="vert">#F21313</color>
+    <color name="vert">#4BCB65</color>
+    <color name="noir">#F3F4F1</color>
+    <color name="marron">#AA8716</color>
+
 
 </resources>

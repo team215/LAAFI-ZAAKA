@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">LAAFI ZAAKA</string>
     <string name="title_activity_maps">LAAFI ZAAKA</string>
+    <string name="pas_de_connexion">Pas d\'internet \nConnectez vous pour vous rendre à la pharmacie la plus proche</string>
+    <string name="hop_pas_de_connexion">Pas d\'internet\n Connectez vous pour vous rendre à l\'hopital la plus proche</string>
+    <string name="phar_pas_de_connexion">Pas d\'internet\n Connectez vous pour vous rendre à la pharmacie la plus proche</string>
+    <string name="loc_pas_connexion">Pas d\'internet \nConnectez vous pour etre localisé par les autorités compétentes</string>
+    <string name="appel">En appuyant sur OUI vous accepter d\'envoyer votre position géographique aux autorités compétente,pour mieux vous venir en aide.</string>
+    <string name="phar_apropos">Retrouve toute les pharmacies du burkina dont tu as besoin et même celles qui sont de garde la nuitet dirriges toi y grace à l\'appli en cas de besoin</string>
+    <string name="hop_apropo">Retrouves tous les centres de santés au Burkina (Hopital, Clinique,CSPS…) et même les heures de visites et fait toi y conduire par l\'appli en cas de besoin</string>
+    <string name="num_apropo">En cas d\'urgence trouves immédiatement de l\'aide en appelant le bon numéro au bon moment et fais toi aidez rapidement en activant ton GPS</string>
+
 </resources>
