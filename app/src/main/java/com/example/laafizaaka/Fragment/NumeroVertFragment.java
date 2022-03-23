@@ -36,7 +36,7 @@ public class NumeroVertFragment extends Fragment {
     private final int[] logo={R.drawable.burkina_police_municipale, R.drawable.logo_police_nationale,
             R.drawable.le_macaron_de_la_gendarmerie2, R.drawable.sonabel, R.drawable.onea};
     private final int[] img={R.drawable.phone, R.drawable.phone, R.drawable.phone, R.drawable.phone, R.drawable.phone};
-    private final String[] num={"17", "17", "17", "17", "17"};
+    private final String[] num={"80001116", "80001103", "80001116", "80001130", "80001111"};
     private TextView BtnNon, BtnOk;
     private androidx.appcompat.app.AlertDialog.Builder builder;
     private ImageView about,negativeBtn, positiveBtn;
@@ -70,26 +70,26 @@ public class NumeroVertFragment extends Fragment {
 
             switch (position){
                 case 0:
-                    String num= "17";
+                    String num= "80001116";
                     ShowDialog(getContext(), num);
                     break;
                 case 1:
-                    String num1= "17";
+                    String num1= "80001103";
                     ShowDialog(getContext(), num1);
                     Toast.makeText(getContext(), "Allo Police", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-                    String num2= "17";
+                    String num2= "80001116";
                     ShowDialog(getContext(), num2);
                     Toast.makeText(getContext(), "Allo Gendarmerie", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
-                    String num3= "17";
+                    String num3= "80001130";
                     ShowDialog(getContext(), num3);
                     Toast.makeText(getContext(), "Allo SONABEL", Toast.LENGTH_SHORT).show();
                     break;
                 case 4:
-                    String num4= "17";
+                    String num4= "80001111";
                     ShowDialog(getContext(), num4);
                     Toast.makeText(getContext(), "Allo ONEA", Toast.LENGTH_SHORT).show();
                     break;

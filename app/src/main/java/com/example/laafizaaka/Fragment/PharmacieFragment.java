@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +18,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.laafizaaka.AproposActivity;
 import com.example.laafizaaka.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 public class PharmacieFragment extends Fragment {
 
     private FrameLayout frameLayout;
     private RelativeLayout relativeLayout;
     private ImageView aboutImg;
+    private View bottomSheet;
 
     @Nullable
     @Override
@@ -34,6 +37,7 @@ public class PharmacieFragment extends Fragment {
         frameLayout= view.findViewById(R.id.phar_container);
         relativeLayout= view.findViewById(R.id.phar_rlayout);
         aboutImg= view.findViewById(R.id.about);
+        bottomSheet= view.findViewById(R.id.idrelative);
 
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         // test for connection
@@ -47,6 +51,35 @@ public class PharmacieFragment extends Fragment {
         }
 
         aboutImg.setOnClickListener(v -> startActivity(new Intent(getContext(), AproposActivity.class)));
+
+        final BottomSheetBehavior behavior= BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState){
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        Toast.makeText(getContext(), "ouvre", Toast.LENGTH_SHORT).show();
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        Toast.makeText(getContext(), "ferme", Toast.LENGTH_SHORT).show();
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        Toast.makeText(getContext(), "vers le haut", Toast.LENGTH_SHORT).show();
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        Toast.makeText(getContext(), "vers le bat", Toast.LENGTH_SHORT).show();
+                        break;
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        Toast.makeText(getContext(), "a gauche", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 
         return view;
     }

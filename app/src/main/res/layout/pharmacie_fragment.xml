@@ -1,64 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/phar_rlayout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/phar_rlayout"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/no_wifi" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phar_pas_de_connexion"
+                    android:layout_below="@id/imageView2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/rouge"
+                    />
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/phar_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                >
+
+                <fragment
+
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/about"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/more_flow" />
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/idrelative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="60dp"
+        app:elevation="4dp"
+        android:background="@color/noir"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         >
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/no_wifi" />
-
-        <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/icon_recher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phar_pas_de_connexion"
-            android:layout_below="@id/imageView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:textColor="@color/rouge"
-            />
+            app:srcCompat="@drawable/flow_pharmacie"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/id_phar_rech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon_recher"
+            android:background="@drawable/edit_design"
+            android:ems="10"
+            android:hint="Rechercher une pharmacie ici"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/phar_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        >
-
-        <fragment
-
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            />
-
-    </FrameLayout>
-
-    <ImageView
-        android:id="@+id/about"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/more_flow" />
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
